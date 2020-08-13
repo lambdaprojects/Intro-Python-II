@@ -5,7 +5,7 @@
 
 class Player:
 
-    def __init__(self, name, items):
+    def __init__(self, name):
         self.name = name
         self.items = []
         self.current_room = 'outside'

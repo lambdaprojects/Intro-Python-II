@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -39,6 +40,17 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+# Get the player name
+player_name = input("\n Please enter your name: ")
+if (len(player_name) == 0 or len(player_name.strip() )== 0):
+    player_name = "Darth Vader"
+
+my_smart_player = Player(player_name)
+
+print(f"\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+print(f"\n         Welcome to the game {player_name}!!")
+print(f"\n         >>>>  Let's get started <<<<")
+print(f"\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +61,4 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
