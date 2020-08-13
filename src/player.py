@@ -14,4 +14,5 @@ class Player:
         str_rep = f"-->> {self.name} is in {self.current_room} with the items :: {self.items} ::<<--"
         return str_rep
 
-
+    def set_current_room(self, room):
+        self.current_room = room

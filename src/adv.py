@@ -66,12 +66,30 @@ print(f"\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 
 is_game_on = True
 
+
+def print_possible_rooms(room):
+    print("\n +++++++++ Here are your options for next move! Choose wisely :) +++++++++")
+    if (room == 'outside'):
+        print("\n <><><>  N -> FOYER  <><><>")
+    elif (room == 'foyer'):
+        print("\n <><><> \n  N -> OVERLOOK  \n  S -> OUTSIDE  \n  E -> NARROW     <><><>")
+    elif (room == 'overlook'):
+        print("\n <><><> \n  S -> FOYER       <><><>")
+    elif (room == 'narrow'):
+        print("\n <><><> \n  N -> TREASURE  \n  W -> FOYER       <><><>")
+    elif (room == 'treasure'):
+        pprint("\n <><><> \n  S -> NARROW       <><><>")
+
 while (is_game_on):
-    print(f"\n ~~|| You are currently in {my_smart_player.current_room}. ||~~")
-    print(f"\n ~~|| Room description: {room[my_smart_player.current_room].description}. ||~~")
+    current_room = my_smart_player.current_room
+    print(f"\n ~~|| You are currently in {current_room}. ||~~")
+    print(f"\n ~~|| Room description: {room[current_room].description}. ||~~")
+    print_possible_rooms(current_room)
     print("\n \n <><><>  IF YOU ENTER 'Q' or 'q' YOU WILL EXIT THE GAME  <><><>")
     next_move = input("\n What's your next move smarty pal! >> ")
-    if (next_move == 'Q' or next_move == 'q'):
+    if (next_move.lower() == 'q'):
         is_game_on = False
         print("\n ***********  Thanks for playing Champ!! *************\n \n")
-    
+    if (next_move.lower() == 'n' and hasattr(room[current_room], 'n_to')):
+        print("\n ->->->->-> Great Choice ")
+        my_smart_player.set_current_room(((room[current_room].n_to).name).lower().partition(' ')[0])
