@@ -72,16 +72,28 @@ def print_possible_rooms(room):
     if (room == 'outside'):
         print("\n <><><>  N -> FOYER  <><><>")
     elif (room == 'foyer'):
-        print("\n <><><> \n  N -> OVERLOOK  \n  S -> OUTSIDE  \n  E -> NARROW     <><><>")
+        print("\n <><><> \n  N -> OVERLOOK  \n  S -> OUTSIDE  \n  E -> NARROW     \n <><><>")
     elif (room == 'overlook'):
-        print("\n <><><> \n  S -> FOYER       <><><>")
+        print("\n <><><> \n  S -> FOYER       \n <><><>")
     elif (room == 'narrow'):
-        print("\n <><><> \n  N -> TREASURE  \n  W -> FOYER       <><><>")
+        print("\n <><><> \n  N -> TREASURE  \n  W -> FOYER       \n <><><>")
     elif (room == 'treasure'):
-        pprint("\n <><><> \n  S -> NARROW       <><><>")
+        print("\n <><><> \n  S -> NARROW       \n <><><>")
+
+def get_room_name(room):
+    if (room == 'Outside Cave Entrance' or room == 'outside'):
+        return 'outside'
+    elif (room == 'Foyer'):
+        return 'foyer'
+    elif (room == 'Grand Overlook'):
+        return 'overlook'
+    elif (room == 'Narrow Passage'):
+        return 'narrow'
+    elif (room == 'Treasure Chamber'):
+        return 'treasure'
 
 while (is_game_on):
-    current_room = my_smart_player.current_room
+    current_room = get_room_name(my_smart_player.current_room)
     print(f"\n ~~|| You are currently in {current_room}. ||~~")
     print(f"\n ~~|| Room description: {room[current_room].description}. ||~~")
     print_possible_rooms(current_room)
@@ -90,6 +102,20 @@ while (is_game_on):
     if (next_move.lower() == 'q'):
         is_game_on = False
         print("\n ***********  Thanks for playing Champ!! *************\n \n")
-    if (next_move.lower() == 'n' and hasattr(room[current_room], 'n_to')):
+    elif (next_move.lower() == 'n' and hasattr(room[current_room], 'n_to')):
         print("\n ->->->->-> Great Choice ")
-        my_smart_player.set_current_room(((room[current_room].n_to).name).lower().partition(' ')[0])
+        my_smart_player.set_current_room((room[current_room].n_to).name)
+    elif (next_move.lower() == 's' and hasattr(room[current_room], 's_to')):
+        print("\n ->->->->-> Go for it!! ")
+        my_smart_player.set_current_room((room[current_room].s_to).name)
+    elif (next_move.lower() == 'e' and hasattr(room[current_room], 'e_to')):
+        print("\n ->->->->-> Wonderful choice!! ")
+        my_smart_player.set_current_room((room[current_room].e_to).name)
+    elif (next_move.lower() == 'w' and hasattr(room[current_room], 'w_to')):
+        print("\n ->->->->-> You chose to go west!! Really?? ")
+        my_smart_player.set_current_room((room[current_room].w_to).name) 
+    else :
+        print("\n  ==================================================================================== ")
+        print("  Hey smarty pants!! That's not in your list of choices now.. is it?? Let's try again! ")
+        print("  ==================================================================================== \n")
+        
