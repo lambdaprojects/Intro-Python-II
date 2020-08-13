@@ -20,6 +20,9 @@ to north. The smell of gold permeates the air."""),
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
+
+    'canyon': Room("Grand Canyon", """These canyons are the best treasures in the world. You 
+can look at them for hours together and will never know how time went by!"""),
 }
 
 
@@ -29,10 +32,12 @@ room['outside'].n_to = room['foyer']
 room['foyer'].s_to = room['outside']
 room['foyer'].n_to = room['overlook']
 room['foyer'].e_to = room['narrow']
+room['foyer'].w_to = room['canyon']
 room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
+room['canyon'].e_to = room['foyer']
 
 #
 # Main
@@ -72,13 +77,15 @@ def print_possible_rooms(room):
     if (room == 'outside'):
         print("\n <><><>  N -> FOYER  <><><>")
     elif (room == 'foyer'):
-        print("\n <><><> \n  N -> OVERLOOK  \n  S -> OUTSIDE  \n  E -> NARROW     \n <><><>")
+        print("\n <><><> \n  N -> OVERLOOK  \n  S -> OUTSIDE  \n  E -> NARROW   \n  W -> CANYON   \n <><><>")
     elif (room == 'overlook'):
         print("\n <><><> \n  S -> FOYER       \n <><><>")
     elif (room == 'narrow'):
         print("\n <><><> \n  N -> TREASURE  \n  W -> FOYER       \n <><><>")
     elif (room == 'treasure'):
         print("\n <><><> \n  S -> NARROW       \n <><><>")
+    elif (room == 'canyon'):
+        print("\n <><><> \n  E -> FOYER       \n <><><>")
 
 def get_room_name(room):
     if (room == 'Outside Cave Entrance' or room == 'outside'):
@@ -91,6 +98,8 @@ def get_room_name(room):
         return 'narrow'
     elif (room == 'Treasure Chamber'):
         return 'treasure'
+    elif (room == 'Grand Canyon'):
+        return 'canyon'
 
 while (is_game_on):
     current_room = get_room_name(my_smart_player.current_room)
