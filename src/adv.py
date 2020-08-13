@@ -51,6 +51,8 @@ print(f"\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 print(f"\n         Welcome to the game {player_name}!!")
 print(f"\n         >>>>  Let's get started <<<<")
 print(f"\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -62,3 +64,14 @@ print(f"\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 #
 # If the user enters "q", quit the game.
 
+is_game_on = True
+
+while (is_game_on):
+    print(f"\n ~~|| You are currently in {my_smart_player.current_room}. ||~~")
+    print(f"\n ~~|| Room description: {room[my_smart_player.current_room].description}. ||~~")
+    print("\n \n <><><>  IF YOU ENTER 'Q' or 'q' YOU WILL EXIT THE GAME  <><><>")
+    next_move = input("\n What's your next move smarty pal! >> ")
+    if (next_move == 'Q' or next_move == 'q'):
+        is_game_on = False
+        print("\n ***********  Thanks for playing Champ!! *************\n \n")
+    
